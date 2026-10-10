@@ -5,99 +5,201 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Monarchs Market</title>
 <style>
+:root {
+  --bg: #0b0e17;
+  --panel: #151a29;
+  --gold: #e7c477;
+  --muted: #a9b0c2;
+  --line: #30384c;
+}
 * { box-sizing: border-box; }
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #0b1020;
-  color: #f5f5f5;
+  color: #f7f7fb;
+  background: var(--bg);
 }
 header {
-  padding: 28px 18px;
-  background: #151d33;
-  border-bottom: 2px solid #d9ad55;
+  padding: 25px 16px;
   text-align: center;
+  background: linear-gradient(140deg,#202b43,#101421);
+  border-bottom: 1px solid var(--gold);
 }
-h1 { margin: 0; color: #e9c46a; }
-header p { color: #bdc5d8; }
-main { max-width: 900px; margin: auto; padding: 20px; }
+.logo { font-size: 30px; font-weight: 800; color: var(--gold); }
+header p { margin-bottom: 0; color: var(--muted); }
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding: 13px;
+  background: #101421;
+  border-bottom: 1px solid var(--line);
+}
+nav a { color: #eee; text-decoration: none; font-size: 14px; }
+main { max-width: 1000px; padding: 20px 14px; margin: auto; }
+.hero {
+  padding: 25px 20px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: radial-gradient(ellipse at top right,#34415b,#151a29 65%);
+}
+h1 { font-size: 27px; margin-top: 0; }
+h2 { color: var(--gold); font-size: 21px; }
+.muted { color: var(--muted); line-height: 1.5; }
 .search {
   width: 100%;
+  margin-top: 12px;
   padding: 14px;
+  border: 1px solid #47536c;
   border-radius: 10px;
-  border: 1px solid #46516c;
-  background: #151d33;
+  background: #0c1120;
   color: white;
   font-size: 16px;
 }
-h2 { color: #e9c46a; }
-.cards {
+.filters { display: flex; gap: 9px; flex-wrap: wrap; margin: 15px 0 20px; }
+button, select {
+  border: 1px solid #46516a;
+  border-radius: 9px;
+  padding: 10px 13px;
+  background: var(--panel);
+  color: white;
+  font-size: 14px;
+}
+button { cursor: pointer; }
+button.active, button:hover { background: #5a4828; border-color: var(--gold); }
+.grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 15px;
+  grid-template-columns: repeat(auto-fit,minmax(215px,1fr));
+  gap: 14px;
 }
 .card {
-  background: #151d33;
-  border: 1px solid #34415d;
-  border-radius: 14px;
-  padding: 18px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: var(--panel);
 }
 .art {
-  height: 125px;
-  display: grid;
-  place-items: center;
-  border-radius: 9px;
-  background: linear-gradient(135deg, #293b60, #101728);
-  font-size: 42px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(145deg,#293954,#101522);
+  border-bottom: 1px solid var(--line);
 }
-.card h3 { margin-bottom: 8px; }
-.price { color: #e9c46a; font-size: 21px; font-weight: bold; }
-.note { color: #aeb8cd; font-size: 13px; }
-footer { text-align: center; padding: 25px; color: #aeb8cd; }
+.art span { font-size: 43px; }
+.art small { color: var(--gold); letter-spacing: 2px; }
+.details { padding: 14px; }
+.details h3 { margin: 0 0 8px; font-size: 17px; }
+.tag {
+  display: inline-block;
+  padding: 5px 8px;
+  border: 1px solid #675734;
+  border-radius: 6px;
+  color: var(--gold);
+  font-size: 12px;
+}
+.price { margin: 13px 0 6px; font-weight: bold; }
+.note { color: var(--muted); font-size: 12px; line-height: 1.4; }
+.empty { display: none; color: var(--muted); padding: 20px 0; }
+footer { padding: 25px 15px; text-align: center; color: var(--muted); border-top: 1px solid var(--line); }
 </style>
 </head>
 <body>
 <header>
-  <h1>👑 Monarchs Market</h1>
-  <p>Svět World's Monarchs na jednom místě</p>
+  <div class="logo">♛ MONARCHS MARKET</div>
+  <p>Sběratelský katalog World's Monarchs</p>
 </header>
+<nav>
+  <a href="#katalog">Katalog</a>
+  <a href="#serie">Série</a>
+  <a href="#info">O projektu</a>
+</nav>
 <main>
-  <h2>Najdi svou kartičku</h2>
-  <input class="search" id="search" placeholder="Hledat panovníka nebo sérii...">
-  <h2>Ukázkové kartičky</h2>
-  <p class="note">Ceny níže jsou pouze ukázkové, nikoli ověřené aktuální nabídky.</p>
-  <div class="cards" id="cards">
-    <article class="card" data-name="dwight eisenhower series 1">
-      <div class="art">🏛️</div>
-      <h3>Dwight D. Eisenhower</h3>
-      <p>Series 1</p>
-      <p class="price">Cena zatím neověřena</p>
-      <p class="note">Ukázková položka katalogu</p>
-    </article>
-    <article class="card" data-name="ho chi minh gold glitter limitovana">
-      <div class="art">✨</div>
-      <h3>Ho Chi Minh</h3>
-      <p>Gold Glitter · limitovaná varianta</p>
-      <p class="price">Cena zatím neověřena</p>
-      <p class="note">Ukázková položka katalogu</p>
-    </article>
-    <article class="card" data-name="donald trump series 2">
-      <div class="art">👑</div>
-      <h3>Donald Trump</h3>
-      <p>Series 2</p>
-      <p class="price">Cena zatím neověřena</p>
-      <p class="note">Ukázková položka katalogu</p>
-    </article>
-  </div>
+  <section class="hero">
+    <h1>Najdi svou další vzácnou kartičku</h1>
+    <p class="muted">Prohlížej si katalog, objevuj varianty a sleduj ceny na jednom místě.</p>
+    <input class="search" id="search" placeholder="Hledat jméno, sérii nebo variantu...">
+  </section>
+
+  <section id="katalog">
+    <h2>Katalog kartiček</h2>
+    <p class="muted">První ukázková verze katalogu. Položky zatím nejsou úplným seznamem vydaných kartiček.</p>
+    <div class="filters" id="filters">
+      <button class="active" data-series="all">Všechny série</button>
+      <button data-series="Series 1">Series 1</button>
+      <button data-series="Series 2">Series 2</button>
+      <button data-series="Limited">Limitované</button>
+    </div>
+    <div class="grid" id="cards">
+      <article class="card" data-name="dwight d eisenhower series 1 base" data-series="Series 1">
+        <div class="art"><span>🏛️</span><small>WORLD'S MONARCHS</small></div>
+        <div class="details">
+          <h3>Dwight D. Eisenhower</h3>
+          <span class="tag">Series 1</span>
+          <p class="price">Cena neověřena</p>
+          <p class="note">Ukázkový záznam · Základní varianta</p>
+        </div>
+      </article>
+      <article class="card" data-name="ho chi minh gold glitter limited limitovana" data-series="Limited">
+        <div class="art"><span>✨</span><small>LIMITED EDITION</small></div>
+        <div class="details">
+          <h3>Ho Chi Minh</h3>
+          <span class="tag">Gold Glitter</span>
+          <p class="price">Cena neověřena</p>
+          <p class="note">Ukázkový záznam · Číslování nutno ověřit</p>
+        </div>
+      </article>
+      <article class="card" data-name="donald trump series 2 base" data-series="Series 2">
+        <div class="art"><span>👑</span><small>WORLD'S MONARCHS</small></div>
+        <div class="details">
+          <h3>Donald Trump</h3>
+          <span class="tag">Series 2</span>
+          <p class="price">Cena neověřena</p>
+          <p class="note">Ukázkový záznam · Základní varianta</p>
+        </div>
+      </article>
+    </div>
+    <p class="empty" id="empty">Žádné kartičky neodpovídají hledání.</p>
+  </section>
+
+  <section id="serie">
+    <h2>Série a varianty</h2>
+    <p class="muted">Cílem je postupně doplnit všechny série, paralelní varianty, limitované edice a číslované kartičky. Každý údaj ověříme podle dostupných zdrojů.</p>
+  </section>
+  <section id="info">
+    <h2>O projektu</h2>
+    <p class="muted">Monarchs Market je neoficiální projekt pro sběratele. Není přidružen k vydavateli World's Monarchs. Ceny nejsou aktuální tržní ocenění, dokud nejsou doloženy zdrojem.</p>
+  </section>
 </main>
-<footer>Monarchs Market · Neoficiální projekt pro sběratele</footer>
+<footer>MONARCHS MARKET · Neoficiální sběratelský projekt</footer>
 <script>
-document.getElementById("search").addEventListener("input", function() {
-  const query = this.value.toLowerCase().trim();
-  document.querySelectorAll(".card").forEach(function(card) {
-    card.style.display = card.dataset.name.includes(query) ? "" : "none";
+const search = document.getElementById("search");
+const cards = [...document.querySelectorAll(".card")];
+const buttons = [...document.querySelectorAll("#filters button")];
+let selectedSeries = "all";
+
+function updateCards() {
+  const query = search.value.toLowerCase().trim();
+  let visible = 0;
+  cards.forEach(card => {
+    const matchesText = card.dataset.name.toLowerCase().includes(query);
+    const matchesSeries = selectedSeries === "all" ||
+      card.dataset.series === selectedSeries ||
+      (selectedSeries === "Limited" && card.dataset.series === "Limited");
+    card.style.display = matchesText && matchesSeries ? "" : "none";
+    if (matchesText && matchesSeries) visible++;
   });
-});
+  document.getElementById("empty").style.display = visible ? "none" : "block";
+}
+search.addEventListener("input", updateCards);
+buttons.forEach(button => button.addEventListener("click", () => {
+  selectedSeries = button.dataset.series;
+  buttons.forEach(b => b.classList.toggle("active", b === button));
+  updateCards();
+}));
 </script>
 </body>
 </html>
