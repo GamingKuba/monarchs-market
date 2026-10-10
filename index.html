@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monarchs Market</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b1020;
+  color: #f5f5f5;
+}
+header {
+  padding: 28px 18px;
+  background: #151d33;
+  border-bottom: 2px solid #d9ad55;
+  text-align: center;
+}
+h1 { margin: 0; color: #e9c46a; }
+header p { color: #bdc5d8; }
+main { max-width: 900px; margin: auto; padding: 20px; }
+.search {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #46516c;
+  background: #151d33;
+  color: white;
+  font-size: 16px;
+}
+h2 { color: #e9c46a; }
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+.card {
+  background: #151d33;
+  border: 1px solid #34415d;
+  border-radius: 14px;
+  padding: 18px;
+}
+.art {
+  height: 125px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #293b60, #101728);
+  font-size: 42px;
+}
+.card h3 { margin-bottom: 8px; }
+.price { color: #e9c46a; font-size: 21px; font-weight: bold; }
+.note { color: #aeb8cd; font-size: 13px; }
+footer { text-align: center; padding: 25px; color: #aeb8cd; }
+</style>
+</head>
+<body>
+<header>
+  <h1>👑 Monarchs Market</h1>
+  <p>Svět World's Monarchs na jednom místě</p>
+</header>
+<main>
+  <h2>Najdi svou kartičku</h2>
+  <input class="search" id="search" placeholder="Hledat panovníka nebo sérii...">
+  <h2>Ukázkové kartičky</h2>
+  <p class="note">Ceny níže jsou pouze ukázkové, nikoli ověřené aktuální nabídky.</p>
+  <div class="cards" id="cards">
+    <article class="card" data-name="dwight eisenhower series 1">
+      <div class="art">🏛️</div>
+      <h3>Dwight D. Eisenhower</h3>
+      <p>Series 1</p>
+      <p class="price">Cena zatím neověřena</p>
+      <p class="note">Ukázková položka katalogu</p>
+    </article>
+    <article class="card" data-name="ho chi minh gold glitter limitovana">
+      <div class="art">✨</div>
+      <h3>Ho Chi Minh</h3>
+      <p>Gold Glitter · limitovaná varianta</p>
+      <p class="price">Cena zatím neověřena</p>
+      <p class="note">Ukázková položka katalogu</p>
+    </article>
+    <article class="card" data-name="donald trump series 2">
+      <div class="art">👑</div>
+      <h3>Donald Trump</h3>
+      <p>Series 2</p>
+      <p class="price">Cena zatím neověřena</p>
+      <p class="note">Ukázková položka katalogu</p>
+    </article>
+  </div>
+</main>
+<footer>Monarchs Market · Neoficiální projekt pro sběratele</footer>
+<script>
+document.getElementById("search").addEventListener("input", function() {
+  const query = this.value.toLowerCase().trim();
+  document.querySelectorAll(".card").forEach(function(card) {
+    card.style.display = card.dataset.name.includes(query) ? "" : "none";
+  });
+});
+</script>
+</body>
+</html>
